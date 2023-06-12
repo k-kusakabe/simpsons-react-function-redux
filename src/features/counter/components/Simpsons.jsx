@@ -6,14 +6,7 @@ const Simpsons = (props) => {
   return (
     <>
       {simpsons.map((item, index) => {
-        return (
-          <Character
-            item={item}
-            key={item.id}
-            // onDelete={onDelete}
-            // onLikeToggle={onLikeToggle}
-          />
-        );
+        return <Character item={item} key={item.id} />;
       })}
     </>
   );

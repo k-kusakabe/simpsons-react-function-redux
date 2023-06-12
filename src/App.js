@@ -27,13 +27,12 @@ const App = () => {
       const { data } = await axios.get(
         `https://thesimpsonsquoteapi.glitch.me/quotes?count=15&character=${search}`
       );
-      dispatch(setSimpsons(data));
+
       //fixed the api data to have unique id
       data.forEach((element, index) => {
         element.id = index + Math.random();
       });
-
-      setSimpsons(data);
+      dispatch(setSimpsons(data));
     } catch (error) {
       console.log(error);
     }
@@ -43,25 +42,6 @@ const App = () => {
   useEffect(() => {
     getData();
   }, [getData]);
-
-  // const onLikeToggle = (id) => {
-  //   const indexOf = simpsons.findIndex((char) => {
-  //     return char.id === id;
-  //   });
-  //   const _simpsons = [...simpsons];
-  //   //invert if liked or not liked
-  //   _simpsons[indexOf].liked = !_simpsons[indexOf].liked;
-  //   setSimpsons(_simpsons);
-  // };
-
-  // const onDelete = (id) => {
-  //   const indexOf = simpsons.findIndex((char) => {
-  //     return char.id === id;
-  //   });
-  //   const _simpsons = [...simpsons];
-  //   _simpsons.splice(indexOf, 1);
-  //   setSimpsons(_simpsons);
-  // };
 
   // // added valiation by joi
   const onInput = async (e) => {
@@ -119,11 +99,7 @@ const App = () => {
       </select>
       <p>{simpsons.length === 0 && "There is no result!"}</p>
       <p>{search && errors && "You can enter only A-Z & 0-9"}</p>
-      <Simpsons
-        simpsons={_simpsons}
-        // onLikeToggle={onLikeToggle}
-        // onDelete={onDelete}
-      />
+      <Simpsons simpsons={_simpsons} />
     </>
   );
 };

@@ -8,21 +8,6 @@ export const counterSlice = createSlice({
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    increment: (state) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.value += 1;
-    },
-    decrement: (state) => {
-      state.value -= 1;
-    },
-    // Use the PayloadAction type to declare the contents of `action.payload`
-    incrementByAmount: (state, action) => {
-      state.value += action.payload;
-    },
-
     setSimpsons: (state, action) => {
       state.simpsons = action.payload;
     },
@@ -33,11 +18,26 @@ export const counterSlice = createSlice({
     setSort: (state, action) => {
       state.sort = action.payload;
     },
+    deleteItem: (state, action) => {
+      const indexOf = state.simpsons.findIndex((char) => {
+        return char.id === action.payload;
+      });
+      state.simpsons.splice(indexOf, 1);
+    },
+    toggleLiked: (state, action) => {
+      const indexOf = state.simpsons.findIndex((char) => {
+        return char.id === action.payload;
+      });
+      //invert if liked or not liked
+      state.simpsons[indexOf].liked = !state.simpsons[indexOf].liked;
+    },
   },
 });
 
 export const {
   setSimpsons,
+  deleteItem,
+  toggleLiked,
   setSearch,
   setSort,
   increment,

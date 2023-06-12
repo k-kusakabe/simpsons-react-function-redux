@@ -6,18 +6,13 @@ import Delete from "./Delete";
 
 const Character = (props) => {
   const { character, quote, image, id, characterDirection, liked } = props.item;
-  const { onLikeToggle, onDelete } = props;
+
   return (
     <div className="characterContainer">
-      <Name
-        character={character}
-        onLikeToggle={onLikeToggle}
-        id={id}
-        liked={liked}
-      />
+      <Name character={character} id={id} liked={liked} />
       <Quote quote={quote} />
       <Image image={image} character={character} />
-      <Delete onDelete={onDelete} id={id} />
+      <Delete id={id} />
     </div>
   );
 };
